@@ -19,9 +19,18 @@
  *          }
  */
 
-export function parsePromised() {
-  // Your code goes here...
+export function parsePromised(json_string) {
+  return new Promise((resolve, reject) => {
+    try {
+      const result = JSON.parse(json_string);
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
 }
+
+// console.log(parsePromised('{"name": "John", "age": 30, "city": "New York"}'));
 
 /**
  * @task
@@ -30,8 +39,8 @@ export function parsePromised() {
  * * logs the message property of the error object
  */
 
-export function onReject() {
-  // Your code goes here...
+export function onReject(error) {
+ console.log(error.message);
 }
 
 /**
@@ -46,10 +55,19 @@ export function onReject() {
  * Example: export const promiseHandler = () => return <your code>
  */
 
-export const handlePromise = () => {
-  // Your code goes here...
+export const handlePromise = (Promise) => {
+  return Promise
+    .then(value => value)
+    .catch(reason => {
+      if (reason.message) {
+        return onReject(reason);
+      } else {
+        return reason;
+      }
+    });
 };
 
+// console.log(handlePromise(new Promise(resolve => resolve('hello'))));
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-7"
 // If the test has all tests passed, switch to the next exercise file

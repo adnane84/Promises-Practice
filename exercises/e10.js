@@ -17,14 +17,14 @@ export const promiseArr = [promise1, promise2, promise3, promise4];
  * using the method to handle multiple promises.
  * The developer used a wrong multiple promises method of .any() to get the value
  * of the first rejected promise in the promiseArr array.
- * Please, refactor the code to use a proper method. You can use on of these:
+ * Please, refactor the code to use a proper method. You can use one of these:
  * * .all()
  * * .any()
  * * .allSettled()
  */
 
 // Your code goes here...
-export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
+export const handlePromise1 = Promise.all(promiseArr).catch((e) => e);
 
 /**
  * @task
@@ -41,6 +41,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
+export const handlePromise2 = (promisesArray) => {
+  return Promise.any(promisesArray).then((data) => data);
+};
 
 /**
  * @task
@@ -57,6 +60,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
+export const handlePromise3 = (promisesArray) => {
+  return Promise.allSettled(promisesArray);
+};
 
 /**
  * @task
@@ -66,7 +72,9 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  * The value of newPromiseArr MUST have more than one promise in the array!
  */
 
-export const newPromiseArr = promiseArr.filter(/* <Your code goes here>*/);
+export const newPromiseArr = promiseArr.filter(
+  (promise) => promise !== promise2 && promise !== promise3
+);
 
 // Do NOT refactor or update handlePromise4 function, it's all set to work
 export const handlePromise4 = (arr) => {
@@ -74,7 +82,6 @@ export const handlePromise4 = (arr) => {
     .then((val) => val)
     .catch((e) => e);
 };
-
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-10"
 // If the test has all tests passed, switch to the next exercise file
